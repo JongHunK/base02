@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.co.mapper.baseMapper">
+
+<!-- <sql id="columns">
+		board_no, title ,content ,created_at
+</sql> -->
+
+	<select id="readBoard" resultType="kr.co.base.base">
+		<![CDATA[
+			select
+				board_no,
+				title,
+				content,
+				writer,
+				created_at,
+				view_count
+			from
+				spring_conncet_test.base02
+			where board_no = #{board_no}
+			
+		]]>
+	</select>
+
+	<insert id="insertBoard">
+		<selectKey keyProperty="board_no" resultType="Integer" order="BEFORE"> 
+			SELECT IFNULL(MAX(board_no), 0)+1 board_no FROM base02 
+		</selectKey> 
+		insert into spring_conncet_test.base02 (
+			board_no,
+			title,
+			content,
+			writer,
+			created_at,
+			view_count
+		)values (
+			#{board_no},
+			#{title},
+			#{content},
+			#{writer},
+			now(),
+			view_count
+		)
+	</insert>
+	<select id="ListAll" resultType="kr.co.base.base">
+		<![CDATA[
+			select
+				board_no,
+				title,
+				content,
+				writer,
+				created_at,
+				view_count
+			from
+				spring_conncet_test.base02
+		]]>
+	</select>
+	<!-- <select id="getBoardListCnt" resultType="int">
+		SELECT
+			count(*) as listCnt
+		FROM
+			base02
+	</select> -->
+	<update id="updateBoard">
+	
+	update spring_conncet_test.base02 set
+		title 	= #{title},
+		content = #{content},
+		writer 	= #{writer}
+		where board_no = #{board_no}
+	</update>
+	
+	<update id="updateViewCnt">
+		update spring_conncet_test.base02 set
+			view_count = view_count+1 where board_no = #{board_no}
+	</update>
+	
+	
+	<delete id="delBoard">
+		delete from spring_conncet_test.base02 where board_no = #{board_no}
+	</delete>
+	
+</mapper>
