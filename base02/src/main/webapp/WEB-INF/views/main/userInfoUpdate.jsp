@@ -26,6 +26,8 @@
 		text-align: center;
 	}.mb-3{
 		margin-top:3%; 
+	}.userInfo{
+		font-weight: bold;
 	}
 </style>
 </head>
@@ -41,12 +43,6 @@
 					<span class="input-group-text" id="basic-addon1">id</span> 
 					<input type="text" class="form-control" placeholder="UserID" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_id}" name ="user_id" readonly="readonly">
 				</div> 
-				<%--  <li class="list-group-item">
-					  	<div class="input-group mb-3">
-						  <span class="input-group-text" id="basic-addon1">@</span>
-						  <input type="text" class="form-control" placeholder="UserPW" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_pw}" readonly="readonly">
-						</div>
-					  </li> --%>
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">name</span> 
 					<input type="text" class="form-control" placeholder="UserName" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_name}" name ="user_name">
@@ -59,8 +55,8 @@
 		</ul>
 	</div>
 	<div class="btnG">
-		<button type="submit" class="btn btn-warning">Update</button>
-		<button type="button" class="btn btn-primary" onclick="goListBtn()">GO List</button>
+		<button type="submit" class="btn btn-warning userInfo">Update</button>
+		<button type="button" class="btn btn-primary userInfo" onclick="goListBtn()">GO List</button>
 	</div>
 	</form>
 </body>

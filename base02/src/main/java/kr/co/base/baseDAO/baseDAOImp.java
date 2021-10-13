@@ -23,8 +23,8 @@ public class baseDAOImp implements baseDAO {
 	}
 
 	@Override
-	public List<base> listAll() throws Exception {
-		return sqlSession.selectList(namespce+".ListAll");
+	public List<base> listAll(pagination pagination) throws Exception {
+		return sqlSession.selectList(namespce+".ListAll",pagination);
 	}
 
 	@Override
@@ -48,8 +48,8 @@ public class baseDAOImp implements baseDAO {
 	}
 
 	@Override
-	public int getBoardListCnt(pagination pagination) throws Exception {
-		return sqlSession.selectOne(namespce+"getBoardListCnt");
+	public int getBoardListCnt() throws Exception {
+		return sqlSession.selectOne(namespce+".getBoardListCnt");
 	}
 
 }

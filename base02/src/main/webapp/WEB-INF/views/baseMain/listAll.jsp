@@ -7,9 +7,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-	
-	
+	//이전 버튼 이벤트
+	function fn_prev(page, range, rangeSize) {
+		var page = ((range - 2) * rangeSize) + 1;
+		var range = range - 1;
+		var url = "${pageContext.request.contextPath}/baseMain/main";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		location.href = url;
+	}
+  	//페이지 번호 클릭
+	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+		var url = "${pageContext.request.contextPath}/baseMain/main";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		location.href = url;	
+	}
+	//다음 버튼 이벤트
+	function fn_next(page, range, rangeSize) {
+		var page = parseInt((range * rangeSize)) + 1;
+		var range = parseInt(range) + 1;
+		var url = "${pageContext.request.contextPath}/baseMain/main";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		location.href = url;
+	}
+
+
 
 </script>
 <style type="text/css">
@@ -19,6 +45,8 @@
 		text-align: center;
 	}.btn{
 		width: 35%;
+	}.pagination{
+		justify-content: center;
 	}
 </style>
 
@@ -36,7 +64,6 @@
 		<col width="20%">
 		<col width="*%">
 		<col width="10%">
-		<col width="15%">
 		<col width="5%">
 		</colgroup>
 		
@@ -47,16 +74,21 @@
 			<td>Title</td>
 			<td>Content</td>
 			<td >Date</td>
-			<td>DEL.B</td>
 			<td>[views]</td>
 		</tr>
-	<c:forEach items="${list}" var="base">
+		
+	<!-- 리스트 출력 -->	
+	<c:if test="${listAll != null}">
+	<c:forEach items="${listAll}" var="base">
 		<tr>
-		<td>${base.board_no} <input hidden="" name="board_no" value="${base.board_no}"></td>
+		<td>
+			${base.board_no}
+			<input hidden="" name="board_no" value="${base.board_no}">
+		</td>
 		<td>${base.writer}</td>
+		
+		
 		<%-- <td><a class="btn btn-primary btn-sm" href='/base/baseMain/read?bno=${base.board_no}'>${base.title}</a> --%>
-		
-		
 		<c:choose>
 			<c:when test="${fn:length(base.title) gt 5}">
 				<td><a class="btn btn-primary btn-sm" href='/base/baseMain/read?bno=${base.board_no}'><c:out value="${fn:substring(base.title, 0, 5)}"></c:out>...</a>
@@ -78,14 +110,37 @@
 		
 		
 		<td>${base.created_at}</td>
-		<td><button class="btn btn-outline-danger"  type="submit" formaction="remove?bno=${base.board_no }" formmethod="post">DEL</button></td>
+		<%-- <td><button class="btn btn-outline-danger"  type="submit" formaction="remove?bno=${base.board_no }" formmethod="post">DEL</button></td> --%>
 		<td>[ ${base.view_count } ]</td>
 		</tr>
-	</c:forEach>
+	</c:forEach >
+	</c:if >
+	<c:if test="${listAll == null}">
+		<div>
+			<h1>글이 없습니다</h1>
+		</div>
+	</c:if>
 		<tr>
 			<td  id="writeButton"  colspan="7" ><a class="btn btn-primary" href="http://localhost:8081/base/baseMain/create">글쓰기</a>
 		</tr>
 	</table>
 	</form>
+	<div id="paginationBox">
+		<ul class="pagination">
+			<c:if test="${pagination.prev}">
+				<li class="page-item"><a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a></li>
+			</c:if>
+			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+				<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a></li>
+			</c:forEach>
+			<c:if test="${pagination.next}">
+				<li class="page-item"><a class="page-link" href="#" onClick="fn_next('${pagination.range}','${pagination.range}', '${pagination.rangeSize}')">Next</a></li>
+			</c:if>
+		</ul>
+	</div>
+
+
+
 </body>
 </html>

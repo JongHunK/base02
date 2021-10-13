@@ -16,6 +16,7 @@
       }.userInfo{
       	color : black;
       	font-weight: 900;
+      	
       }.userInfo{
       	text-align: left;
       }
@@ -26,6 +27,9 @@
 		}
 		function userInfoBtn() {
 			location.href="http://localhost:8081/base/main/userInfo"
+		}
+		function insertUser() {
+			location.href="http://localhost:8081/base/main/register"
 		}
 	</script>
 <meta charset="UTF-8">
@@ -52,7 +56,8 @@
 				    </div>
 				  </div>
 			    <button type="submit" class="btn btn-primary" style="font-size:15px">로그인</button>
-			    <a href="http://localhost:8081/base/main/register" class="btn btn-success" style="font-size:15px" >회원가입</a>
+			    <!-- <a href="http://localhost:8081/base/main/register" class="btn btn-success" style="font-size:15px" >회원가입</a> -->
+			    <button type="button" class="btn btn-success" style="font-size:15px" onclick="insertUser()">회원가입</button>
 			  </div>
 			</div>
 		</div>

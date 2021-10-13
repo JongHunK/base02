@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,9 @@
 		text-align: center;
 	}.mb-3{
 		margin-top:3%; 
+	}.userInfo{
+		color : white;
+		font-weight: bold;
 	}
 </style>
 </head>
@@ -36,33 +40,41 @@
 	<div>
 		<jsp:include page="../template/header.jsp" flush="false"/>
 	</div>
-	<div class="card">
-	  <ul class="list-group list-group-flush">
-	    <li class="list-group-item ">
-		    <div class="input-group mb-3">
-			  <span class="input-group-text" id="basic-addon1">id</span>
-			  <input type="text" class="form-control" placeholder="UserID" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_id}" readonly="readonly">
-			</div>
-	   <%--  <li class="list-group-item">
-	    	<div class="input-group mb-3">
-			  <span class="input-group-text" id="basic-addon1">@</span>
-			  <input type="text" class="form-control" placeholder="UserPW" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_pw}" readonly="readonly">
-			</div>
-	    </li> --%>
-	   	    <div class="input-group mb-3">
-			  <span class="input-group-text" id="basic-addon1">name</span>
-			  <input type="text" class="form-control" placeholder="UserName" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_name}" readonly="readonly">
-			</div>
-		    <div class="input-group mb-3">
-			  <span class="input-group-text" id="basic-addon1">email</span>
-			  <input type="text" class="form-control" placeholder="UserEmail" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_email}" readonly="readonly">
-			</div>	    
-	    </li>
-	  </ul>
-	</div>
-	<div class="btnG">
-		<button type="button" class="btn btn-warning" onclick="updateBtn()">Update</button>
-		<button type="button" class="btn btn-primary" onclick="goListBtn()">GO List</button>
-	</div>
+	<c:if test="${member != null }">
+		<div class="card">
+		  <ul class="list-group list-group-flush">
+		    <li class="list-group-item ">
+			    <div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">id</span>
+				  <input type="text" class="form-control" placeholder="UserID" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_id}" readonly="readonly">
+				</div>
+		   <%--  <li class="list-group-item">
+		    	<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">@</span>
+				  <input type="text" class="form-control" placeholder="UserPW" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_pw}" readonly="readonly">
+				</div>
+		    </li> --%>
+		   	    <div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">name</span>
+				  <input type="text" class="form-control" placeholder="UserName" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_name}" readonly="readonly">
+				</div>
+			    <div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">email</span>
+				  <input type="text" class="form-control" placeholder="UserEmail" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_email}" readonly="readonly">
+				</div>	    
+		    </li>
+		  </ul>
+		</div>
+		<div class="btnG">
+			<button type="button" class="btn btn-warning userInfo" onclick="updateBtn()">Update</button>
+			<button type="button" class="btn btn-primary userInfo" onclick="goListBtn()">GO List</button>
+		</div>
+	</c:if>
+	<c:if test="${member == null }">
+		<script type="text/javascript">
+			alert("로그인후 이용이 가능합니다");
+			location.href="http://localhost:8081/base/main/LoginPage";
+		</script>
+	</c:if>
 </body>
 </html>

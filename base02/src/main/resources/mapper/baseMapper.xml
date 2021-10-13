@@ -57,14 +57,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				view_count
 			from
 				spring_conncet_test.base02
+			limit
+				#{startList},#{listSize}	
 		]]>
 	</select>
-	<!-- <select id="getBoardListCnt" resultType="int">
+	<select id="getBoardListCnt" resultType="int">
 		SELECT
 			count(*) as listCnt
 		FROM
 			base02
-	</select> -->
+	</select>
 	<update id="updateBoard">
 	
 	update spring_conncet_test.base02 set

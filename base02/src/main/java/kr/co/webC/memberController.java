@@ -106,6 +106,7 @@ public class memberController {
 	public String userInfo() {
 		
 		return "/main/userInfo";
+		
 	}
 	
 	@RequestMapping(value="/userInfoUpdate",method=RequestMethod.GET)
@@ -114,11 +115,13 @@ public class memberController {
 		return "/main/userInfoUpdate";
 	}
 	@RequestMapping(value="/userInfoUpdate",method=RequestMethod.POST)
-	public String userInfoUpdatePOST(member vo) throws Exception {
+	public String userInfoUpdatePOST(member vo,HttpSession session,Model model)throws Exception {
+		
 		service.userUpdate(vo);
-		return "/baseMain/main";
+		//model.addAttribute("updateReload","회원정보가 수정되었습니다. 다시 로그인 해주세요");
+		session.invalidate();
+		return "redirect:/baseMain/main";
 	}
-	
 	
 	
 	

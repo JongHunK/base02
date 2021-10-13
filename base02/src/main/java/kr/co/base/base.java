@@ -17,4 +17,5 @@ public class base {
 	private Date created_at;
 	
 	private int view_count;
+	//private boolean user_update = false;
 }

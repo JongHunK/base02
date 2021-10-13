@@ -46,7 +46,7 @@
 
 <main >
 		<h1 class="visually-hidden">Sidebars</h1>
-		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 345px; height: 810px">
+		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 345px; height: 770px">
 		
 		
 		

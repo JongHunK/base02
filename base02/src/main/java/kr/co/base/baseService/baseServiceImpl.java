@@ -21,8 +21,8 @@ public class baseServiceImpl implements baseService {
 	}
 
 	@Override
-	public List<base> listAll() throws Exception {
-		return dao.listAll();
+	public List<base> listAll(pagination pagination) throws Exception {
+		return dao.listAll(pagination);
 	}
 
 	@Override
@@ -46,8 +46,8 @@ public class baseServiceImpl implements baseService {
 	}
 
 	@Override
-	public int getBoardListCnt(pagination pagination) throws Exception {
-		return dao.getBoardListCnt(pagination);
+	public int getBoardListCnt() throws Exception {
+		return dao.getBoardListCnt();
 	}
 
 }
