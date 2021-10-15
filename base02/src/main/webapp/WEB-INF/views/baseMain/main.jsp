@@ -24,7 +24,6 @@
 		width: 80%;
 		float: right;
 		padding-right : 30px;
-		margin-top: 3%;
 	}#side{
 		float:left;
 		width: 20%;

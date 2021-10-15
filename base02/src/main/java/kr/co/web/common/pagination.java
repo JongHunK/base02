@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class pagination {
 	
-	private int listSize = 10;
+	private int listSize = 12;
 	private int rangeSize = 10;
 	private int page;
 	private int range;

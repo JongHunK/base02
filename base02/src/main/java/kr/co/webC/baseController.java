@@ -37,7 +37,7 @@ public class baseController {
 		model.addAttribute("listAll",service.listAll(pagination));
 		return "/baseMain/main";
 	}
-
+     
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public void createGET(base baord, Model model) throws Exception {
 	}
@@ -77,6 +77,7 @@ public class baseController {
 
 	@RequestMapping(value = "/read", method = RequestMethod.GET) 
 	public void read(@RequestParam("bno") int bno, Model model) throws Exception {
+		pagination pagination = new pagination();
 		service.updateViewCnt(bno);
 		model.addAttribute(service.readBoard(bno)); 
 	}

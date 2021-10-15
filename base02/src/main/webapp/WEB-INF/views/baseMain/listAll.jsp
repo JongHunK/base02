@@ -35,7 +35,16 @@
 		location.href = url;
 	}
 
-
+	function readBtn(bno) {
+		var readD="/base/baseMain/read?bno=";
+		var url = readD+bno;
+		location.href = url;
+		
+	}
+	var list = document.getElementsByClassName("boardNo");
+	for (var i = 1; i <= list.length; i++) {
+	    list[i].innerHTML = i;
+	}
 
 </script>
 <style type="text/css">
@@ -47,7 +56,31 @@
 		width: 35%;
 	}.pagination{
 		justify-content: center;
+	}.form-select{
+		width: 100px
+	}.searchBtn{
+		text-align: right;
+		margin-bottom: 1%;
+	}.titleBtn{
+		width: 75%;
+	}.Search{
+		width : 50px;
+	}.noneContent{
+		text-align: center;
+		font-weight: bold;
+		font-size: 50px
 	}
+	
+	/*
+	 출력은되나 페이지처리때문에 번호 초기화
+	body {
+        counter-reset: chapter 0;
+    }.boardNo:before {
+        counter-increment: chapter;
+        content: counter(chapter) ". ";
+    } */
+    
+    
 </style>
 
 
@@ -55,13 +88,27 @@
 <title>JSP Title</title>
 </head>
 <body>
+	<form action="" class="searchBtn">
+	<div class="btn-group" role="group" aria-label="Basic example">
+		<select class="" aria-label="Default select example">
+		  <option selected>All</option>
+		  <option value="1">작성자</option>
+		  <option value="2">제목</option>    
+		  <option value="3">내용</option>
+		</select>
+		<input type="text">
+		<button type="button" class = "Search btn btn-primary btn-sm">test</button>
+	</div>
+	</form>
+	
+	
 	<form>
 	<table class="table table-hover">
 		
 		<colgroup>
 		<col width="5%">
+		<col width="10%">
 		<col width="15%">
-		<col width="20%">
 		<col width="*%">
 		<col width="10%">
 		<col width="5%">
@@ -78,10 +125,10 @@
 		</tr>
 		
 	<!-- 리스트 출력 -->	
-	<c:if test="${listAll != null}">
+	<c:if test="${pagination.listCnt != 0}">
 	<c:forEach items="${listAll}" var="base">
 		<tr>
-		<td>
+		<td class="boardNo">
 			${base.board_no}
 			<input hidden="" name="board_no" value="${base.board_no}">
 		</td>
@@ -90,18 +137,18 @@
 		
 		<%-- <td><a class="btn btn-primary btn-sm" href='/base/baseMain/read?bno=${base.board_no}'>${base.title}</a> --%>
 		<c:choose>
-			<c:when test="${fn:length(base.title) gt 5}">
-				<td><a class="btn btn-primary btn-sm" href='/base/baseMain/read?bno=${base.board_no}'><c:out value="${fn:substring(base.title, 0, 5)}"></c:out>...</a>
+			<c:when test="${fn:length(base.title) gt 8}">
+				<td><a class="titleBtn btn btn-primary btn-sm" onclick="readBtn('${base.board_no}')"><c:out value="${fn:substring(base.title, 0, 8)}"></c:out>...</a>
 			</c:when>
 			<c:otherwise>
-				<td><a class="btn btn-primary btn-sm" href='/base/baseMain/read?bno=${base.board_no}'><c:out value="${base.title}"/></a>
+				<td><a class="titleBtn btn btn-primary btn-sm" onclick="readBtn('${base.board_no}')"><c:out value="${base.title}"/></a>
 			</c:otherwise>
 		</c:choose>
 		
 		
 		<c:choose>
-			<c:when test="${fn:length(base.content) gt 26}">
-				<td><c:out value="${fn:substring(base.content, 0, 26)}"></c:out>...
+			<c:when test="${fn:length(base.content) gt 50}">
+				<td><c:out value="${fn:substring(base.content, 0, 50)}"></c:out>...
 			</c:when>
 			<c:otherwise>
 				<td><c:out value="${base.content}"/>
@@ -115,10 +162,8 @@
 		</tr>
 	</c:forEach >
 	</c:if >
-	<c:if test="${listAll == null}">
-		<div>
-			<h1>글이 없습니다</h1>
-		</div>
+	<c:if test="${pagination.listCnt == 0 }">
+			<tr><td class="noneContent" colspan="6">글이 없습니다</td></tr>
 	</c:if>
 		<tr>
 			<td  id="writeButton"  colspan="7" ><a class="btn btn-primary" href="http://localhost:8081/base/baseMain/create">글쓰기</a>

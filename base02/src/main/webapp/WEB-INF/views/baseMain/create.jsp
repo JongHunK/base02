@@ -13,10 +13,32 @@
 	}
 	
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
+	
+	$(document).ready(function(){
+		$("#createBtn").on("click", function(){
+			if($("#title").val()==""){
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#content").val()==""){
+				alert("내용를 입력해주세요.");
+				$("#content").focus();
+				return false;
+			}
+			
+		});
+	}) 
+	
+	
 	function mainBtn() {
 		location.href="http://localhost:8081/base/baseMain/main";
 	}
+	
+	
+	
 </script>
 <meta charset="UTF-8">
 <title>Write</title>
@@ -29,18 +51,18 @@
 		<form action="create"  method="POST" class="insertCard">
 			<div class="mb-3">
 				<label for="exampleFormControlInput1" class="form-label">Title</label>
-				<input name="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title">
+				<input name="title" type="text" class="form-control" id="title" placeholder="Title">
 			</div>
 			<div class="mb-3">
 				<label for="exampleFormControlTextarea1" class="form-label">Content</label>
-				<textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 400px"></textarea>
+				<textarea name="content" class="form-control" id="content" rows="3" style="height: 400px"></textarea>
 			</div>
 			<div class="mb-3">
 				<label for="exampleFormControlInput1" class="form-label">Writer</label>
-				<input name="writer" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Writer" readonly="readonly" value="${member.user_name }">
+				<input name="writer" type="text" class="form-control" id="writer" placeholder="Writer" readonly="readonly" value="${member.user_name }">
 			</div>
 			<div class="boot">
-				<button type="submit" class="btn btn-primary btn-lg">Create</button>
+				<button type="submit" class="btn btn-primary btn-lg" name="createBtn">Create</button>
 				<button type="button" class="btn btn-secondary btn-lg" onclick="mainBtn()">List</button>
 			</div>
 		</form>

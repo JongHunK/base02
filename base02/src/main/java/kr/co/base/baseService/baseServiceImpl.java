@@ -50,4 +50,9 @@ public class baseServiceImpl implements baseService {
 		return dao.getBoardListCnt();
 	}
 
+	@Override
+	public List<base> search(pagination pagination) throws Exception {
+		return dao.search(pagination);
+	}
+
 }

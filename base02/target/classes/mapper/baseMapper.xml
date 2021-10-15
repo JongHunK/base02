@@ -10,6 +10,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		board_no, title ,content ,created_at
 </sql> -->
 
+	
+	<!-- ******************************************* -->
+	<!-- ******************Search******************* -->
+	<!-- ******************************************* -->
+	<select id="searchAll" resultType="kr.co.base.base">
+		<![CDATA[
+			select
+				*
+			from
+				spring_conncet_test.base02
+			where 
+				writer = #{search} or 
+				title = #{search} or 
+				content = #{search}
+			
+		]]>
+	</select>
+	
+	
 	<select id="readBoard" resultType="kr.co.base.base">
 		<![CDATA[
 			select

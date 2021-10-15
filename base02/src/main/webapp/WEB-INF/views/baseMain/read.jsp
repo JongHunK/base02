@@ -15,8 +15,9 @@
       	border: 0.5px solid gray;
       	width: 80%;
       	margin: 0% 10% 0% 10%;
-    }textarea{
+    }.form-control{
     	height: 500px;
+    	background-color: white!important;
     }
 </style>
 <script type="text/javascript">
@@ -36,7 +37,7 @@
 		<div class="card-header">${base.title}</div>
 		<div class="card-body">
 			<h5 class="card-title">${base.writer}</h5>
-			<textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea">${base.content}</textarea>
+			<textarea class="form-control" placeholder="Leave a comment here" readonly="readonly" id="floatingTextarea">${base.content}</textarea>
 		</div>
 		<div class="card-footer text-muted">
 			<div>Date/View</div>

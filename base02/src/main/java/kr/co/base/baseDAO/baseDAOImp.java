@@ -52,4 +52,9 @@ public class baseDAOImp implements baseDAO {
 		return sqlSession.selectOne(namespce+".getBoardListCnt");
 	}
 
+	@Override
+	public List<base> search(pagination pagination) throws Exception {
+		return sqlSession.selectList(namespce+".searchAll",pagination);
+	}
+
 }
