@@ -115,8 +115,8 @@ public class memberController {
 		return "/main/userInfoUpdate";
 	}
 	@RequestMapping(value="/userInfoUpdate",method=RequestMethod.POST)
-	public String userInfoUpdatePOST(member vo,HttpSession session,Model model)throws Exception {
-		
+	public String userInfoUpdatePOST(String user_new_name,member vo,HttpSession session,Model model)throws Exception {
+		service.updateBoardWriter(user_new_name);
 		service.userUpdate(vo);
 		//model.addAttribute("updateReload","회원정보가 수정되었습니다. 다시 로그인 해주세요");
 		session.invalidate();

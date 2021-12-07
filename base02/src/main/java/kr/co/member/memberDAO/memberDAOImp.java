@@ -31,4 +31,9 @@ public class memberDAOImp implements memberDAO {
 		sqlsession.update(namespace+".updateUser",vo);
 	}
 
+	@Override
+	public void updateBoardWriter(String user_new_name) throws Exception {
+		sqlsession.update(namespace+".updateBoardWriter",user_new_name);
+	}
+
 }

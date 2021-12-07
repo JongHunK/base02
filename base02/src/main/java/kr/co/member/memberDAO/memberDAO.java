@@ -7,4 +7,6 @@ public interface memberDAO {
 	public member login(member vo)throws Exception;
 	public void userUpdate(member vo)throws Exception;
 	
+	public void updateBoardWriter(String user_new_name)throws Exception;
+	
 }

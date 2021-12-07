@@ -48,6 +48,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+	<update id="updateBoardWriter">
+		update spring_conncet_test.base02 set
+			writer 	= #{user_new_name}
+			where writer = #{user_name};
+	</update>
+	
 	
 	
 	

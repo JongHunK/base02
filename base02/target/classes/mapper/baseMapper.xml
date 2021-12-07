@@ -24,10 +24,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				writer = #{search} or 
 				title = #{search} or 
 				content = #{search}
-			
 		]]>
 	</select>
-	
 	
 	<select id="readBoard" resultType="kr.co.base.base">
 		<![CDATA[
@@ -41,10 +39,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			from
 				spring_conncet_test.base02
 			where board_no = #{board_no}
-			
 		]]>
 	</select>
-
+	
+	<select id="ListAll" resultType="kr.co.base.base">
+		<![CDATA[
+			select
+				board_no,
+				title,
+				content,
+				writer,
+				created_at,
+				view_count
+			from
+				spring_conncet_test.base02
+			limit
+				#{startList},#{listSize}	
+		]]>
+	</select>
+	
+	<select id="getBoardListCnt" resultType="int">
+		SELECT
+			count(*) as listCnt
+		FROM
+			base02
+	</select>
+	
+	
+	<!-- ******************************************* -->
+	<!-- ******************Insert******************* -->
+	<!-- ******************************************* -->
 	<insert id="insertBoard">
 		<selectKey keyProperty="board_no" resultType="Integer" order="BEFORE"> 
 			SELECT IFNULL(MAX(board_no), 0)+1 board_no FROM base02 
@@ -65,29 +89,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			view_count
 		)
 	</insert>
-	<select id="ListAll" resultType="kr.co.base.base">
-		<![CDATA[
-			select
-				board_no,
-				title,
-				content,
-				writer,
-				created_at,
-				view_count
-			from
-				spring_conncet_test.base02
-			limit
-				#{startList},#{listSize}	
-		]]>
-	</select>
-	<select id="getBoardListCnt" resultType="int">
-		SELECT
-			count(*) as listCnt
-		FROM
-			base02
-	</select>
-	<update id="updateBoard">
 	
+	
+	
+	
+	<!-- ******************************************* -->
+	<!-- ******************Update******************* -->
+	<!-- ******************************************* -->
+	<update id="updateBoard">
 	update spring_conncet_test.base02 set
 		title 	= #{title},
 		content = #{content},
@@ -101,8 +110,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	
+	
+	<!-- ******************************************* -->
+	<!-- ******************Delete******************* -->
+	<!-- ******************************************* -->
 	<delete id="delBoard">
 		delete from spring_conncet_test.base02 where board_no = #{board_no}
 	</delete>
+	
+	
+	
 	
 </mapper>
