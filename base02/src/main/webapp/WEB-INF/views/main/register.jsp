@@ -7,11 +7,20 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-
+	var Id_check;
 	$(document).ready(function(){
 		$("#createBtn").on("click", function(){
 			if($("#user_id").val()==""){
 				alert("아이디를 입력해주세요.");
+				$("#user_id").focus();
+				return false;
+			}
+			if (Id_check == null) {
+				alert("아이디 중복체크를 해주세요");
+				$("#user_id").focus();
+				return false;
+			}else if(Id_check == 0){
+				alert("이미 사용중인 아이디입니다.");
 				$("#user_id").focus();
 				return false;
 			}
@@ -49,6 +58,12 @@
 		
 		if (${success != null}) {
 			alert("${success}");
+		}
+		if (${msg} != null) {
+			alert("${msg}");
+		}
+		if (${errmsg} != null) {
+			alert("${errmsg}");
 		}
 		
 		
@@ -95,10 +110,24 @@
 	function goListPage() {
 		location.href = "http://localhost:8081/base/baseMain/main"
 	}
+	 
 	
-	
-	function idCheckBtn() {
-		
+	$('#idCheckBtn').click(function() {
+		$.ajax({
+			type:"POST",
+			url:"/register",
+			data:{"userId" : $('#user_id').val()},
+			success : function(){
+				alert('사용가능한 아이디 입니다');
+				Id_chcek = 1;
+				$("#user_id").focus();
+			},
+			error : function(){
+				alert('이미 사용중인 아이디 입니다');
+				Id_chcek = 0;
+				$("#user_id").focus();
+			}
+		});
 	} 
 	 
 	

@@ -45,7 +45,7 @@
 				</div> 
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">name</span> 
-					<input type="text" class="form-control" placeholder="UserName" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_name}" name ="user_name">
+					<input type="text" class="form-control" placeholder="UserName" aria-label="Username" aria-describedby="basic-addon1" value="${member.user_name}" name ="new_user_name">
 				</div>
 				<div class="input-group mb-3">
 					<span class="input-group-text" id="basic-addon1">email</span> 

@@ -32,8 +32,8 @@ public class memberController {
 		
 		
 		String KorErr = null;String idLengthErr = null;String pwCh=null;
-		
-		
+		String msg = null ;
+		String errmsg = null ;
 		if (vo.getUser_id().matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
 			KorErr = "아이디는 영문만 가능합니다";
 			model.addAttribute("idInKorea",KorErr);
@@ -49,10 +49,25 @@ public class memberController {
 			model.addAttribute("pwCh",pwCh);
 			return "/main/register";
 		}
+		if (service.idCheck(vo) == "0") {
+			msg = "사용가능한 아이디입니다";
+		}else {
+			msg = "이미 사용중인 아이디입니다";
+			model.addAttribute("errmsg",errmsg);
+			return "/main/register";
+		}
+		
+		
+		
+		try {
+			service.register(vo);
+		} catch (Exception e) {
+			errmsg = "등록 오류";
+		}
+		
+		model.addAttribute("msg",msg);
+		
 		model.addAttribute("success","회원가입 성공!");
-		service.register(vo);
-		
-		
 		return "redirect:/baseMain/main";
 	}
 	
@@ -115,8 +130,8 @@ public class memberController {
 		return "/main/userInfoUpdate";
 	}
 	@RequestMapping(value="/userInfoUpdate",method=RequestMethod.POST)
-	public String userInfoUpdatePOST(String user_new_name,member vo,HttpSession session,Model model)throws Exception {
-		service.updateBoardWriter(user_new_name);
+	public String userInfoUpdatePOST(member vo,HttpSession session,Model model)throws Exception {
+		//service.updateBoardWriter(user_new_name);
 		service.userUpdate(vo);
 		//model.addAttribute("updateReload","회원정보가 수정되었습니다. 다시 로그인 해주세요");
 		session.invalidate();

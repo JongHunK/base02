@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			user_id = #{user_id}
 			AND user_pw = #{user_pw} 
 	</select>
-	<select id="idCheck" resultType="int">
+	<select id="idCheck" resultType="kr.co.member.member">
 		SELECT 
 			COUNT(*) 
 		FROM spring_conncet_test.member WHERE
@@ -41,19 +41,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<update id="updateUser">
-		UPDATE spring_conncet_test.member SET
-			user_name = #{user_name},
-			user_email = #{user_email}
-		WHERE user_id = #{user_id}
+		UPDATE spring_conncet_test.member as a inner join spring_conncet_test.base02 as b 
+			on a.user_name = b.writer
+			SET a.user_name = #{new_user_name},b.writer = #{new_user_name},a.user_email = #{user_email}
+		WHERE a.user_id = #{user_id}
+		
 	</update>
 	
-	
+	<!-- 
 	<update id="updateBoardWriter">
 		update spring_conncet_test.base02 set
 			writer 	= #{user_new_name}
 			where writer = #{user_name};
 	</update>
-	
+	 -->
 	
 	
 	

@@ -29,8 +29,7 @@ public class memberServiceImpl implements memberService {
 	}
 
 	@Override
-	public void updateBoardWriter(String user_new_name) throws Exception {
-		dao.updateBoardWriter(user_new_name);
+	public String idCheck(member vo) throws Exception {
+		return dao.idCheck(vo);
 	}
-
 }

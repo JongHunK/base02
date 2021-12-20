@@ -32,8 +32,7 @@ public class memberDAOImp implements memberDAO {
 	}
 
 	@Override
-	public void updateBoardWriter(String user_new_name) throws Exception {
-		sqlsession.update(namespace+".updateBoardWriter",user_new_name);
+	public String idCheck(member vo) throws Exception {
+		return sqlsession.selectOne(namespace+".idCheck",vo);
 	}
-
 }
